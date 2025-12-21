@@ -10,18 +10,18 @@ export default function ContentForm({ setTasks }) {
     link: "",
     notes: "",
   });
-const TYPE_OPTIONS = [
-  { key: "Blog", label: "Blog" },
-  { key: "Video", label: "Video" },
-  { key: "Thread", label: "Thread" },
-];
-const Publish_options = [
-  { key: "Hashnode", label: "Hashnode" },
-  { key: "Medium", label: "Medium" },
-  { key: "LinkedIn", label: "LinkedIn" },
-  { key: "YouTube", label: "YouTube" },
-  { key: "Twitter", label: "Twitter" },
-];
+  const TYPE_OPTIONS = [
+    { key: "Blog", label: "Blog" },
+    { key: "Video", label: "Video" },
+    { key: "Thread", label: "Thread" },
+  ];
+  const Publish_options = [
+    { key: "Hashnode", label: "Hashnode" },
+    { key: "Medium", label: "Medium" },
+    { key: "LinkedIn", label: "LinkedIn" },
+    { key: "YouTube", label: "YouTube" },
+    { key: "Twitter", label: "Twitter" },
+  ];
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!form.title) return;
@@ -53,53 +53,41 @@ const Publish_options = [
     >
       {/* Inputs */}
       <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
-  <input
-    className="input p-2 rounded-lg"
-    placeholder="Content title"
-    value={form.title}
-    onChange={(e) =>
-      setForm({ ...form, title: e.target.value })
-    }
-  />
+        <input
+          className="input p-2 rounded-lg"
+          placeholder="Content title"
+          value={form.title}
+          onChange={(e) => setForm({ ...form, title: e.target.value })}
+        />
 
-  <CustomDropdown
-    options={TYPE_OPTIONS}
-    value={form.type}
-    onChange={(value) =>
-      setForm({ ...form, type: value })
-    }
-    placeholder="Content type"
-  />
+        <CustomDropdown
+          options={TYPE_OPTIONS}
+          value={form.type}
+          onChange={(value) => setForm({ ...form, type: value })}
+          placeholder="Content type"
+        />
 
-  <input
-    placeholder="Add link of the content"
-    className="input p-2 rounded-lg"
-    value={form.link}
-    onChange={(e) =>
-      setForm({ ...form, link: e.target.value })
-    }
-  />
+        <input
+          placeholder="Add link of the content"
+          className="input p-2 rounded-lg"
+          value={form.link}
+          onChange={(e) => setForm({ ...form, link: e.target.value })}
+        />
 
-  <CustomDropdown
-    options={Publish_options}
-    value={form.platform}
-    onChange={(value) =>
-      setForm({ ...form, platform: value })
-    }
-    placeholder="Content platform"
-  />
+        <CustomDropdown
+          options={Publish_options}
+          value={form.platform}
+          onChange={(value) => setForm({ ...form, platform: value })}
+          placeholder="Content platform"
+        />
 
-
-  <input
-    type="date"
-    className="input p-2 rounded-lg"
-    value={form.deadline}
-    onChange={(e) =>
-      setForm({ ...form, deadline: e.target.value })
-    }
-  />
-</div>
-
+        <input
+          type="date"
+          className="input p-2 rounded-lg"
+          value={form.deadline}
+          onChange={(e) => setForm({ ...form, deadline: e.target.value })}
+        />
+      </div>
 
       {/* Notes */}
       <textarea
@@ -113,7 +101,7 @@ const Publish_options = [
       <div className="flex justify-center mt-6">
         <button
           type="submit"
-          className="bg-blue-800 px-8 py-2 text-white hover:bg-blue-600 font-semibold rounded-lg transition"
+          className="bg-blue-800 px-8 py-2  text-white hover:bg-blue-600 font-semibold rounded-lg transition"
         >
           Add Content
         </button>

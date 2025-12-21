@@ -13,6 +13,9 @@ import {
 export default function App() {
   const [tasks, setTasks] = useState(loadTasks());
   const [reminders, setReminders] = useState([]);
+  const [query, setQuery] = useState("");
+const [platformFilter, setPlatformFilter] = useState("");
+
 
   useEffect(() => {
     saveTasks(tasks);
@@ -49,6 +52,11 @@ export default function App() {
       setReminders([]);
     }
   }, [tasks]);
+  const visibleTasks = tasks.filter((t) =>
+  t.title.toLowerCase().includes(query.toLowerCase()) &&
+  (!platformFilter || t.platform === platformFilter)
+);
+
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-stone-950 via-stone-900 to-stone-800 text-white">

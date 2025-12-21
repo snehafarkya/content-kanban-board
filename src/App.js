@@ -51,7 +51,7 @@ export default function App() {
   }, [tasks]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-zinc-950 via-zinc-900 to-zinc-800 text-white">
+    <div className="min-h-screen bg-gradient-to-br from-stone-950 via-stone-900 to-stone-800 text-white">
       <Header />
       <ReminderBanner reminders={reminders} />
       <ContentForm setTasks={setTasks} />

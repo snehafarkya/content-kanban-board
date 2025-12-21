@@ -6,12 +6,12 @@ export default function ContentForm({ setTasks }) {
     type: "Blog",
     platform: "Substack",
     deadline: "",
+    link: "",
     notes: "",
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     if (!form.title) return;
 
     setTasks((prev) => [
@@ -29,6 +29,7 @@ export default function ContentForm({ setTasks }) {
       type: "Blog",
       platform: "Substack",
       deadline: "",
+      link: "",
       notes: "",
     });
   };
@@ -36,8 +37,9 @@ export default function ContentForm({ setTasks }) {
   return (
     <form
       onSubmit={handleSubmit}
-      className="max-w-5xl mx-auto bg-zinc-900/60 backdrop-blur p-6 rounded-xl border text-black border-zinc-700"
+      className="max-w-5xl md:mx-auto mx-6 bg-zinc-900/60 backdrop-blur p-6 rounded-xl border text-black border-zinc-700"
     >
+      {/* Inputs */}
       <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
         <input
           className="input p-2 rounded-lg"
@@ -56,6 +58,13 @@ export default function ContentForm({ setTasks }) {
           <option>Thread</option>
         </select>
 
+        <input
+          placeholder="Add link of the content"
+          className="input p-2 rounded-lg"
+          value={form.link}
+          onChange={(e) => setForm({ ...form, link: e.target.value })}
+        />
+
         <select
           className="input p-2 rounded-lg"
           value={form.platform}
@@ -73,18 +82,25 @@ export default function ContentForm({ setTasks }) {
           value={form.deadline}
           onChange={(e) => setForm({ ...form, deadline: e.target.value })}
         />
-
-        <button className="bg-white text-black font-semibold rounded-lg">
-          Add
-        </button>
       </div>
 
+      {/* Notes */}
       <textarea
         className="input mt-4 p-2 rounded-lg w-full h-24"
         placeholder="Notes / angle / hook"
         value={form.notes}
         onChange={(e) => setForm({ ...form, notes: e.target.value })}
       />
+
+      {/* Centered Button */}
+      <div className="flex justify-center mt-6">
+        <button
+          type="submit"
+          className="bg-blue-800 px-8 py-2 text-white hover:bg-blue-600 font-semibold rounded-lg transition"
+        >
+          Add Content
+        </button>
+      </div>
     </form>
   );
 }

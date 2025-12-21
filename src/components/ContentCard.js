@@ -42,6 +42,7 @@ export default function ContentCard({ task, setTasks }) {
         {...attributes}
         className="cursor-grab"
       >
+        <a href={task.link} target="_blank" rel="noopener noreferrer">
         <h3 className="font-semibold pr-6">{task.title}</h3>
 
         <p className="text-xs text-zinc-400 mt-1">
@@ -66,6 +67,7 @@ export default function ContentCard({ task, setTasks }) {
             Published 🎉
           </p>
         )}
+        </a>
       </div>
     </div>
   );

@@ -52,7 +52,7 @@ export default function EditContentModal({ task, isOpen, onClose, onSave }) {
 
         <button
           onClick={handleSave}
-          className="bg-zinc-700 hover:bg-zinc-500 px-4 py-1 rounded text-sm text-white"
+          className="bg-zinc-800 hover:bg-zinc-700 px-4 py-1 rounded text-sm text-white"
         >
           Save
         </button>

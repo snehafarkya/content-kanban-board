@@ -33,7 +33,7 @@ export default function CustomDropdown({
           e.stopPropagation();
           setOpen((prev) => !prev);
         }}
-        className="w-full p-2 text-left bg-white border-gray-300 border rounded-md  flex justify-between items-center"
+        className="w-full p-2 text-left bg-white  border rounded-md  flex justify-between items-center"
       >
         <span>
           {selectedOption ? selectedOption.label : placeholder}

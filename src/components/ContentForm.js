@@ -49,7 +49,7 @@ export default function ContentForm({ setTasks, onClose }) {
   return (
     <form
       onSubmit={handleSubmit}
-      className="max-w-5xl md:mx-auto mx-6  backdrop-blur p-6 rounded-xl border text-black border-zinc-700"
+      className="max-w-5xl md:mx-auto mx-6  backdrop-blur p-6 rounded-xl border text-black "
     >
       {/* Inputs */}
       <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
@@ -83,7 +83,7 @@ export default function ContentForm({ setTasks, onClose }) {
 
         <input
           type="date"
-          className="input p-2 rounded-lg"
+          className="input p-2 rounded-lg border"
           value={form.deadline}
           onChange={(e) => setForm({ ...form, deadline: e.target.value })}
         />
@@ -101,9 +101,9 @@ export default function ContentForm({ setTasks, onClose }) {
       <div className="flex justify-center mt-6">
          <button
         type="submit"
-        className="bg-blue-800 w-max px-4 py-2 text-white rounded-lg hover:bg-blue-600 transition"
+        className="bg-zinc-800 w-max px-4 py-2 text-white rounded-lg hover:bg-zinc-700 transition"
       >
-        Add 
+        Add Content
       </button>
       </div>
     </form>

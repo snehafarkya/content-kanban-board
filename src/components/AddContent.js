@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Modal from "./Modal";
 import ContentForm from "./ContentForm";
+import { MdAdd } from "react-icons/md";
 
 export default function AddContent({ setTasks }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -11,9 +12,9 @@ export default function AddContent({ setTasks }) {
       <div className="flex justify-center mt-6">
         <button
           onClick={() => setIsOpen(true)}
-          className="bg-gray-800 px-6 py-2 text-white rounded-lg hover:bg-gray-600 transition"
+          className="bg-zinc-800 px-4 py-2 flex gap-1 items-center text-white rounded-lg hover:bg-zinc-700 transition"
         >
-          Add Content
+         <MdAdd/> New Content
         </button>
       </div>
 

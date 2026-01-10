@@ -1,12 +1,18 @@
-export default function Header() {
+import AddContent from "./AddContent";
+import { useState } from "react";
+
+export default function Header({setTasks}) {
   return (
-    <header className="py-10 text-center">
-      <h1 className="text-4xl text-yellow-400 font-bold tracking-tight">
-        Content Creation Pipeline
+    <header className="flex flex-col md:flex-row justify-between items-start  ">
+      <div className="flex flex-col">
+      <h1 className="text-4xl font-bold  tracking-tight">
+        Content Pipeline
       </h1>
-      <p className="text-zinc-400 mt-2">
-        Manage your Content creation pipeline here, from ideas to published stories.
+      <p className="text-gray-600 mt-2">
+        Track content from Ideation to Publication.
       </p>
+      </div>
+      <AddContent setTasks={setTasks}/>
     </header>
   );
 }

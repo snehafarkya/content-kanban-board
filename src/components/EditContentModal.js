@@ -11,12 +11,12 @@ export default function EditContentModal({ task, isOpen, onClose, onSave }) {
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
-      <h2 className="font-semibold mb-4 text-white text-lg">
+      <h2 className="font-semibold mb-4 text-zinc-500 text-lg">
         Edit Content
       </h2>
 
       <input
-        className="input p-2 text-black rounded mb-3 w-full"
+        className="input p-2 text-black border rounded mb-3 w-full"
         value={form.title}
         onChange={(e) =>
           setForm({ ...form, title: e.target.value })
@@ -25,7 +25,7 @@ export default function EditContentModal({ task, isOpen, onClose, onSave }) {
       />
 
       <input
-        className="input p-2  text-black rounded mb-3 w-full"
+        className="input p-2  text-black border rounded mb-3 w-full"
         value={form.link}
         onChange={(e) =>
           setForm({ ...form, link: e.target.value })
@@ -34,7 +34,7 @@ export default function EditContentModal({ task, isOpen, onClose, onSave }) {
       />
 
       <textarea
-        className="input p-2  text-black rounded mb-4 w-full"
+        className="input p-2  text-black border rounded mb-4 w-full"
         value={form.notes}
         onChange={(e) =>
           setForm({ ...form, notes: e.target.value })
@@ -45,14 +45,14 @@ export default function EditContentModal({ task, isOpen, onClose, onSave }) {
       <div className="flex justify-end gap-3">
         <button
           onClick={onClose}
-          className="px-3 py-1 text-sm text-zinc-400 hover:text-white"
+          className="px-3 py-1 text-sm text-zinc-400 hover:text-zinc-500"
         >
           Cancel
         </button>
 
         <button
           onClick={handleSave}
-          className="bg-blue-700 hover:bg-blue-600 px-4 py-1 rounded text-sm text-white"
+          className="bg-zinc-700 hover:bg-zinc-500 px-4 py-1 rounded text-sm text-white"
         >
           Save
         </button>

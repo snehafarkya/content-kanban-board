@@ -33,7 +33,7 @@ export default function Overview({ tasks }) {
       : 0;
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-5 md:w-auto  gap-4 mb-8">
+    <div className="grid grid-cols-1 md:grid-cols-5 md:w-auto w-max text-wrap gap-4 mb-8">
       <OverviewCard
         title="Ideas"
         count={statusCount.idea}

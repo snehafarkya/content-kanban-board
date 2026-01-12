@@ -4,6 +4,8 @@ import EditContentModal from "./EditContentModal";
 import DeleteConfirmModal from "./DeleteConfirmModal";
 import { FaCalendar, FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
+import { motion } from "framer-motion";
+
 
 export default function ContentCard({ task, setTasks }) {
   const [editing, setEditing] = useState(false);
@@ -67,11 +69,16 @@ export default function ContentCard({ task, setTasks }) {
 
   return (
     <>
-      <div
-        ref={setNodeRef}
-        style={style}
-        className="relative mb-4 rounded-xl border bg-white p-4 transition"
-      >
+      <motion.div
+  ref={setNodeRef}
+  style={style}
+  initial={{ opacity: 0, y: 10 }}
+  animate={{ opacity: 1, y: 0 }}
+  exit={{ opacity: 0, scale: 0.95 }}
+  transition={{ duration: 0.2, ease: "easeOut" }}
+  whileHover={{ y: -2 }}
+  className="relative mb-4 rounded-xl border bg-white p-4"
+>
         {/* Action Buttons */}
         <div className="absolute top-4 right-2 flex gap-2 z-10">
           <button
@@ -138,7 +145,7 @@ export default function ContentCard({ task, setTasks }) {
             )}
           </a>
         </div>
-      </div>
+      </motion.div>
 
       {/* Modals */}
       <EditContentModal

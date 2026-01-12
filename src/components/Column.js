@@ -1,6 +1,6 @@
 import { useDroppable } from "@dnd-kit/core";
 import ContentCard from "./ContentCard";
-
+import { motion } from "framer-motion";
 const STATUS_CONFIG = {
   idea: {
     label: "Ideas",
@@ -44,9 +44,16 @@ export default function Column({ id, title, tasks = [], setTasks }) {
         </div>
 
         {/* Count badge */}
-        <span className="bg-gray-200 text-gray-700 rounded-md px-2 py-0.5 text-sm font-medium">
+        <motion.span
+          key={tasks.length}
+          initial={{ scale: 0.8, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 0.15 }}
+          className="bg-gray-200 text-gray-700 rounded-md px-2 py-0.5 text-sm font-medium"
+        >
           {tasks.length}
-        </span>
+        </motion.span>
+        
       </div>
 
       {/* Cards */}

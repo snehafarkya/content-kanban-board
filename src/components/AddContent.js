@@ -9,7 +9,7 @@ export default function AddContent({ setTasks }) {
   return (
     <>
       {/* Add Content Button */}
-      <div className="flex justify-center mt-6">
+      <div className="flex justify-center ">
         <button
           onClick={() => setIsOpen(true)}
           className="bg-zinc-800 px-4 py-2 flex gap-1 items-center text-white rounded-lg hover:bg-zinc-700 transition"

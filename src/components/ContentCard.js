@@ -1,5 +1,5 @@
 import { useDraggable } from "@dnd-kit/core";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import EditContentModal from "./EditContentModal";
 import DeleteConfirmModal from "./DeleteConfirmModal";
 import { FaCalendar, FaEdit } from "react-icons/fa";
@@ -9,104 +9,138 @@ export default function ContentCard({ task, setTasks }) {
   const [editing, setEditing] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
 
+  const {
+    id,
+    title,
+    notes,
+    type,
+    platform,
+    status,
+    deadline,
+    link,
+  } = task;
+
   const { setNodeRef, attributes, listeners, transform } = useDraggable({
-    id: task.id,
+    id,
   });
 
+  const style = useMemo(
+    () => ({
+      transform: transform
+        ? `translate(${transform.x}px, ${transform.y}px)`
+        : undefined,
+    }),
+    [transform]
+  );
+
+  const typeBadgeClass = useMemo(() => {
+    switch (type) {
+      case "Blog":
+        return "bg-yellow-100 text-yellow-600";
+      case "Video":
+        return "bg-red-100 text-red-600";
+      default:
+        return "bg-blue-100 text-blue-600";
+    }
+  }, [type]);
+
+  const handleEdit = (e) => {
+    e.stopPropagation();
+    setEditing(true);
+  };
+
+  const handleDelete = (e) => {
+    e.stopPropagation();
+    setShowDeleteModal(true);
+  };
+
   const handleDeleteConfirm = () => {
-    setTasks((prev) => prev.filter((t) => t.id !== task.id));
+    setTasks((prev) => prev.filter((t) => t.id !== id));
     setShowDeleteModal(false);
   };
 
   const handleSave = (updatedTask) => {
-    setTasks((prev) => prev.map((t) => (t.id === task.id ? updatedTask : t)));
+    setTasks((prev) =>
+      prev.map((t) => (t.id === id ? updatedTask : t))
+    );
   };
 
   return (
     <>
       <div
         ref={setNodeRef}
-        style={{
-          transform: transform
-            ? `translate(${transform.x}px, ${transform.y}px)`
-            : undefined,
-        }}
-        className="rounded-xl p-4 mb-4 border bg-white transition relative"
+        style={style}
+        className="relative mb-4 rounded-xl border bg-white p-4 transition"
       >
-        {/* Delete Button */}
+        {/* Action Buttons */}
+        <div className="absolute top-4 right-2 flex gap-2 z-10">
+          <button
+            onClick={handleEdit}
+            className="text-zinc-400 hover:text-blue-400 text-sm"
+            title="Edit"
+          >
+            <FaEdit />
+          </button>
 
-        <button
-          onClick={(e) => {
-            e.stopPropagation();
-            setShowDeleteModal(true);
-          }}
-          className="absolute top-4 right-2 text-zinc-400 hover:text-red-400 text-sm z-10"
-          title="Delete"
-        >
-          <MdDelete />
-        </button>
+          <button
+            onClick={handleDelete}
+            className="text-zinc-400 hover:text-red-400 text-sm"
+            title="Delete"
+          >
+            <MdDelete />
+          </button>
+        </div>
 
-        {/* Edit Button */}
-        <button
-          onClick={(e) => {
-            e.stopPropagation();
-            setEditing(true);
-          }}
-          className="absolute top-4 right-6 text-zinc-400 hover:text-blue-400 text-sm"
-          title="Edit"
-        >
-          <FaEdit />
-        </button>
-
-        {/* Drag Handle */}
+        {/* Drag Handle + Content */}
         <div {...listeners} {...attributes} className="cursor-grab">
           <a
-            href={task.link}
+            href={link}
             target="_blank"
             rel="noopener noreferrer"
-            className=" flex flex-col gap-2"
             onClick={(e) => e.stopPropagation()}
+            className="flex w-[80%] flex-col gap-2 break-words whitespace-normal"
           >
-            <h3 className="font-semibold capitalize">{task.title}</h3>
+            <h3 className="font-semibold capitalize break-words">
+              {title}
+            </h3>
 
-            {task.notes && (
-              <p className=" text-zinc-500 ">{task.notes}</p>
+            {notes && (
+              <p className="text-zinc-500">{notes}</p>
             )}
-            <div className="flex justify-between items-center">
-            <p className="text-xs flex gap-2 items-center text-zinc-500 mt-1">
-              <span
-                className={`px-2 py-0.5 rounded-lg font-medium text-xs ${
-                  task.type === "Blog"
-                    ? "bg-yellow-100 text-yellow-600"
-                    : task.type === "Video"
-                    ? "bg-red-100 text-red-600"
-                    : "bg-blue-100 text-blue-600"
-                }`}
-              >
-                {task.type}
-              </span>
-              {task.platform}
-              
-            </p>
-            {task.status !== "idea" && task.deadline && (
-              <span className="text-xs text-zinc-500 flex gap-1 items-center "> <FaCalendar/> {task.deadline}</span>
-            )}
+
+            <div className="flex items-center justify-between">
+              <p className="flex items-center gap-2 text-xs text-zinc-500">
+                <span
+                  className={`rounded-lg px-2 py-0.5 text-xs font-medium ${typeBadgeClass}`}
+                >
+                  {type}
+                </span>
+                {platform}
+              </p>
+
+              {status !== "idea" && deadline && (
+                <span className="absolute right-2 flex items-center gap-1 text-xs text-zinc-500">
+                  <FaCalendar /> {deadline}
+                </span>
+              )}
             </div>
 
-            {task.status === "review" && (
-              <p className="text-xs text-yellow-400 mt-2">
+            {status === "review" && (
+              <p className="mt-2 text-xs text-yellow-400">
                 Needs final polish ✨
               </p>
             )}
 
-            {task.status === "published" && (
-              <p className="text-xs text-green-400 mt-2">Published 🎉</p>
+            {status === "published" && (
+              <p className="mt-2 text-xs text-green-400">
+                Published 🎉
+              </p>
             )}
           </a>
         </div>
       </div>
 
-      {/* Edit Modal */}
+      {/* Modals */}
       <EditContentModal
         task={task}
         isOpen={editing}
@@ -114,7 +148,6 @@ export default function ContentCard({ task, setTasks }) {
         onSave={handleSave}
       />
 
-      {/* Delete Modal */}
       <DeleteConfirmModal
         isOpen={showDeleteModal}
         onClose={() => setShowDeleteModal(false)}

@@ -7,7 +7,7 @@ const STATUS_CONFIG = {
     dot: "bg-orange-500",
   },
   writing: {
-    label: "Writing",
+    label: "In Progress",
     dot: "bg-blue-500",
   },
   review: {
